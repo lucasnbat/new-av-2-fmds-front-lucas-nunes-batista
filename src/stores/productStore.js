@@ -17,19 +17,35 @@ export const useProductStore = defineStore('productStore', {
     },
     async addProduct(product) {
       try {
-        const response = await axios.post('http://localhost:3001/api/products', product);
+        const formattedProduct = {
+          ...product,
+          price: parseFloat(product.price).toFixed(2) // Ensure price is a decimal
+        };
+        const response = await axios.post('http://localhost:3001/api/products', formattedProduct);
         this.products.push(response.data);
       } catch (error) {
         console.error('Erro ao adicionar produto:', error);
       }
     },
     async updateProduct(product) {
-      await axios.put(`http://localhost:3001/api/products/${product.id}`, product);
-      await this.fetchProducts();
+      try {
+        const formattedProduct = {
+          ...product,
+          price: parseFloat(product.price).toFixed(2) // Ensure price is a decimal
+        };
+        await axios.put(`http://localhost:3001/api/products/${product.id}`, formattedProduct);
+        await this.fetchProducts(); // Refresh product list
+      } catch (error) {
+        console.error('Erro ao atualizar produto:', error);
+      }
     },
     async deleteProduct(productId) {
-      await axios.delete(`http://localhost:3001/api/products/${productId}`);
-      this.products = this.products.filter((p) => p.id !== productId);
+      try {
+        await axios.delete(`http://localhost:3001/api/products/${productId}`);
+        this.products = this.products.filter((p) => p.id !== productId);
+      } catch (error) {
+        console.error('Erro ao deletar produto:', error);
+      }
     },
   },
 });

@@ -3,8 +3,10 @@
     <h1>Cadastrar Novo Produto</h1>
     <v-form ref="form" @submit.prevent="addProduct" :model-value="isFormValid">
       <v-text-field style="border-radius: 1.5rem;" label="Descrição" v-model="description" required></v-text-field>
-      <v-text-field style="border-radius: 1.5rem;" label="Quantidade" v-model="quantity" type="number" required></v-text-field>
-      <v-text-field style="border-radius: 1.5rem;" label="Preço" v-model="price" type="number" required></v-text-field>
+      <v-text-field style="border-radius: 1.5rem;" label="Quantidade" v-model="quantity" type="number"
+        required></v-text-field>
+      <v-text-field style="border-radius: 1.5rem;" label="Preço" v-model="price" type="number" step="0.01"
+        required></v-text-field>
       <v-btn color="primary" :disabled="!isFormValid" @click="addProduct">Cadastrar</v-btn>
     </v-form>
   </v-container>
@@ -27,7 +29,7 @@ const addProduct = async () => {
   const productData = {
     description: description.value,
     quantity: parseInt(quantity.value, 10),
-    price: parseInt(price.value, 10),
+    price: parseFloat(price.value).toFixed(2) // Armazena como decimal com duas casas
   };
 
   try {
@@ -37,4 +39,5 @@ const addProduct = async () => {
     console.error('Erro ao cadastrar produto:', error);
   }
 };
+
 </script>

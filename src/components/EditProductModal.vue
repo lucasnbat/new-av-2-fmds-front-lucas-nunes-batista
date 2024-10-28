@@ -6,7 +6,7 @@
         <v-form ref="form" @submit.prevent="updateProduct">
           <v-text-field label="Descrição" v-model="localProduct.description" required></v-text-field>
           <v-text-field label="Quantidade" v-model="localProduct.quantity" type="number" required></v-text-field>
-          <v-text-field label="Preço" v-model="localProduct.price" type="number" required></v-text-field>
+          <v-text-field label="Preço" v-model="localProduct.price" type="number" step="0.01" required></v-text-field>
         </v-form>
       </v-card-text>
       <v-card-actions>
@@ -49,7 +49,7 @@ const close = () => {
 };
 
 const updateProduct = async () => {
-  localProduct.value.price = parseInt(localProduct.value.price, 10);
+  localProduct.value.price = parseFloat(localProduct.value.price).toFixed(2);
   localProduct.value.quantity = parseInt(localProduct.value.quantity, 10);
 
   try {
