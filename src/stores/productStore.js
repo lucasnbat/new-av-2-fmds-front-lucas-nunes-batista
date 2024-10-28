@@ -19,7 +19,7 @@ export const useProductStore = defineStore('productStore', {
       try {
         const formattedProduct = {
           ...product,
-          price: parseFloat(product.price).toFixed(2) // Ensure price is a decimal
+          price: parseFloat(product.price).toFixed(2)
         };
         const response = await axios.post('http://localhost:3001/api/products', formattedProduct);
         this.products.push(response.data);
@@ -31,7 +31,7 @@ export const useProductStore = defineStore('productStore', {
       try {
         const formattedProduct = {
           ...product,
-          price: parseFloat(product.price).toFixed(2) // Ensure price is a decimal
+          price: parseFloat(product.price).toFixed(2)
         };
         await axios.put(`http://localhost:3001/api/products/${product.id}`, formattedProduct);
         await this.fetchProducts(); // Refresh product list
