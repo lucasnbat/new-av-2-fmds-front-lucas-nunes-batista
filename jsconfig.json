@@ -3,7 +3,7 @@
     "allowJs": true,
     "target": "es5",
     "module": "esnext",
-    "baseUrl": "./",
+    "baseUrl": "./aluno6",
     "moduleResolution": "bundler",
     "paths": {
       "@/*": [
